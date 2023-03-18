@@ -1,3 +1,4 @@
+import '../styles/app.sass';
 import Nav from '../components/Nav';
 
 

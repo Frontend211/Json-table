@@ -7,7 +7,7 @@ export default function SmartList({startData,  columns}){
     [data,setData] = useState(startData);
   return <>
     filter:<input type="text"></input>
-    <table>
+    <table className="smart">
       <THead columns={columns}/>
       <TBody data={data} columns={columns}/>
     </table>  
