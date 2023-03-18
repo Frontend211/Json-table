@@ -1,5 +1,7 @@
-export default function THead({columns}){
+export default function THead({ columns }) {
   return <thead>
-    {columns?.map(el=><th key={el.name}>{el.name}</th>)}
+    <tr>
+      {columns?.map(el => <th key={el.name}>{el.name}</th>)}
+    </tr>
   </thead>;
 }

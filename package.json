@@ -20,12 +20,14 @@
     "url": "https://github.com/Frontend211/Json-table/issues"
   },
   "homepage": "https://github.com/Frontend211/Json-table#readme",
-  "dependencies": {
-    "eslint-config-next": "^13.2.4",
-    "lint": "^0.8.19",
+  "dependencies": {    
     "next": "^13.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.59.3"
+  },
+  "devDependencies": {
+    "eslint-config-next": "^13.2.4",
+    "lint": "^0.8.19"
   }
 }

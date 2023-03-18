@@ -12,8 +12,8 @@ export default function StaticUsersPage({data}){
   return <SmartList startData= {data} columns={columns} />;
 }
 
-export async function getStaticProps(context) {
-  const data = await (await fetch('https://jsonplaceholder.typicode.com/users')).json();
+export async function getStaticProps() {
+  const data = await (await fetch(api)).json();
   return {
     props: {data}, // will be passed to the page component as props
   };
