@@ -1,5 +1,5 @@
-import Email from "../components/Email"
-import SmartList from "../components/SmartList"
+import Email from '../components/Email';
+import SmartList from '../components/SmartList';
 
 const api = 'https://jsonplaceholder.typicode.com/users',
   columns = [
@@ -9,12 +9,12 @@ const api = 'https://jsonplaceholder.typicode.com/users',
   ];
 
 export default function StaticUsersPage({data}){
-  return <SmartList startData= {data} columns={columns} />
+  return <SmartList startData= {data} columns={columns} />;
 }
 
 export async function getStaticProps(context) {
   const data = await (await fetch('https://jsonplaceholder.typicode.com/users')).json();
   return {
     props: {data}, // will be passed to the page component as props
-  }
+  };
 }

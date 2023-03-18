@@ -4,5 +4,5 @@ export default function TBody({data,columns}){
     {data?.map(el=><tr key={el.id}>
       {columns?.map(col=><td key={col.name}>{col.getEl(el)}</td>)}
     </tr>)}
-  </tbody>
+  </tbody>;
 }

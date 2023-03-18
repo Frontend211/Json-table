@@ -1,6 +1,6 @@
-import { useState } from "react"
-import TBody from "../components/TBody";
-import THead from "../components/THead";
+import { useState } from 'react';
+import TBody from '../components/TBody';
+import THead from '../components/THead';
 
 export default function SmartList({startData,  columns}){
   const 
