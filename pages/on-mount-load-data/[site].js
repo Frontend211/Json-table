@@ -13,6 +13,8 @@ export default function FetchDataOnMountPage() {
     { api, transform, columns } = getByPath(router.query.site),
     fetchData = _ => {   //async
       // если у компонента появятся пропсы которые могут изменяться - то тут необходимо будет сбрасывать ошибку
+      setError(null);
+      setData(null);
       fetch(api)                  // try {
         .then(res => res.json())
         .then(obj => setData(transform(obj)))  // setData (await (await fetch(api)).json())

@@ -18,7 +18,7 @@ const
         columns: [
           { name: 'Name', getVal: obj => obj.name },
           { name: 'Email', getVal: obj => obj.email, comp: Email },
-          { name: 'Address city', getVal: obj => obj.address.city },
+          { name: 'Address city', getVal: obj => obj.address?.city },
         ]
       },
       {
