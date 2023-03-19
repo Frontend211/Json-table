@@ -1,13 +1,19 @@
 import Link from 'next/link';
+import {apiList}  from '../includes/api-list';
 
 
 export default function Nav(){
   return <nav><ul>
     <li><Link href="/">Home</Link></li>
-    <li><Link href="/static-data/json-place-holder-users">Static JPH</Link></li>
-    <li><Link href="/static-data/rick-and-morty-characters">Static R&M</Link></li>
-    <li><Link href="/on-click-load-data">Button Users</Link></li>
-    <li><Link href="/">Home</Link></li>
+    {apiList.map(({path,title})=>
+      <li key={path}><Link href={'/static-data/'+path}>Static {title}</Link></li>
+    )}
+    {apiList.map(({path,title})=>
+      <li key={path}><Link href={'/on-click-load-data/'+path}>Button {title}</Link></li>
+    )}
+    {apiList.map(({path,title})=>
+      <li key={path}><Link href={'/on-mount-load-data/'+path}>Auto {title}</Link></li>
+    )}
   </ul>
   <hr/>
   </nav>;

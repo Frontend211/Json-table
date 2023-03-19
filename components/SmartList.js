@@ -3,6 +3,7 @@ import TBody from '../components/TBody';
 import THead from '../components/THead';
 
 export default function SmartList({ startData, columns }) {
+  // console.log('SmartList columns=',columns);
   const
     // eslint-disable-next-line no-unused-vars
     [data, setData] = useState(startData);
