@@ -1,9 +1,21 @@
+// https://developer.mozilla.org/ru/docs/Web/CSS/:link
+// https://css-tricks.com/remember-selectors-with-love-and-hate/
+
+a:link
+  color: DarkGreen
+a:visited
+  color: Olive
+a:hover
+  color: LimeGreen
+a:active
+  color: SpringGreen
+
 nav
   ul
     display: flex
     font-size: x-large
     justify-content: space-evenly
-    box-shadow: inset 0 0 20px 2px ActiveText
+    box-shadow: inset 0 0 20px 2px Lime 
     list-style-type: none
     margin: 0
 
@@ -20,7 +32,7 @@ nav
   tr:nth-of-type(even) 
     background-color: LightGray
 
-  tr:hover 
+  tbody tr:hover 
     background-color: gold
   
   td:hover 
@@ -33,6 +45,10 @@ nav
     background-color: DarkGreen
     color: White
     text-align: center
+
+.error
+  color: yellow
+  background-color: red
 
 #__next:empty, .spinner 
   width: 64px
