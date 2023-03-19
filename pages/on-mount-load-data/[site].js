@@ -2,7 +2,7 @@ import { getByPath } from '../../includes/api-list';
 import SmartList from '../../components/SmartList';
 
 import { useRouter } from 'next/router';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function FetchDataOnMountPage() {
   const
@@ -18,11 +18,11 @@ export default function FetchDataOnMountPage() {
         .then(obj => setData(transform(obj)))  // setData (await (await fetch(api)).json())
         .catch(err => setError(err)); // } catch(err) {  setError(err) }
     };
-  
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(fetchData,[router.query.site]);
+  useEffect(fetchData, [router.query.site]);
 
   if (error) return <div className="error">{error.message}</div>;
-  if (data) return <SmartList startData={data} columns={columns}/>;
+  if (data) return <SmartList startData={data} columns={columns} />;
   return <div className="spinner"></div>;
 }
