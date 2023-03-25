@@ -15,6 +15,6 @@ export function Status({ value }) {
     case 'Dead':
       return <span>&#8224; {value}</span>;
     case 'unknown':
-      return <span className="red">&#63; {value}</span>;
+      return <span className="red">&#63; &#63; &#63; {value}</span>;
   }
 }
