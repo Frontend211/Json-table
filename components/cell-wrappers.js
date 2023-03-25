@@ -11,10 +11,10 @@ export function Status({ value }) {
   //Alex
   switch (value) {
     case 'Alive':
-      return <span className="green">&#10003; {value}</span>;
+      return <span className="icon">{Img('https://luxe-host.ru/wp-content/uploads/4/a/d/4adb75862559033b671348128a6a4b94.png')}</span>;
     case 'Dead':
-      return <span>&#8224; {value}</span>;
+      return <span className="icon">{Img('https://static.vecteezy.com/system/resources/previews/000/680/125/original/coffin-with-skeleton-and-roses.jpg')}</span>;
     case 'unknown':
-      return <span className="red">&#63; &#63; &#63; {value}</span>;
+      return <span className="icon">{Img('http://kl9.cnppm.ru/wp-content/uploads/2021/11/unnamed.jpg')}</span>;
   }
 }
