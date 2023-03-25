@@ -17,7 +17,7 @@ const
         title: 'Users',
         columns: [
           { name: 'Name', getVal: obj => obj.name },
-          { name: 'Email', getVal: obj => obj.email, comp: Email },
+          { name: 'Email', getVal: obj => obj.email, wrap: Email },
           { name: 'Address city', getVal: obj => obj.address?.city },
         ]
       },
@@ -25,12 +25,23 @@ const
         path: 'rick-and-morty-characters',
         api: 'https://rickandmortyapi.com/api/character/?page=1',
         transform: data => data.results,
-        title: 'Rick and Morty',
+        title: 'Rick & Morty',
         columns: [
-          { name: 'Image', getVal: obj => obj.image, comp: Img},
+          { name: 'Image', getVal: obj => obj.image, wrap: Img},
           { name: 'Name', getVal: obj => obj.name },
           { name: 'Status', getVal: obj => obj.status },
           
+        ]
+      },
+      {
+        path: 'omdbapi-green',
+        api: 'https://www.omdbapi.com/?apikey=a2b07930&s=green',
+        transform: data => data.Search.map(film=>({id:film.imdbID, ...film})),
+        title: 'OMDb',
+        columns: [
+          { name: 'Title', getVal: obj => obj.Title },
+          { name: 'Year', getVal: obj => obj.Year },
+          { name: 'Poster', getVal: obj => obj.Poster,  wrap: Img},
         ]
       }]
   };
