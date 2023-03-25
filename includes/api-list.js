@@ -1,4 +1,4 @@
-import { Email, Img } from '../components/cell-wrappers';
+import { Email, Img, Website } from '../components/cell-wrappers';
 
 const
   internal = {
@@ -19,6 +19,7 @@ const
           { name: 'Name', getVal: obj => obj.name },
           { name: 'Email', getVal: obj => obj.email, wrap: Email },
           { name: 'Address city', getVal: obj => obj.address?.city },
+          { name: 'Website', getVal: obj => obj.website, wrap: Website },
         ]
       },
       {
