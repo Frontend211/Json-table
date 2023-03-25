@@ -1,10 +1,10 @@
-import { Email, Img } from '../components/cell-wrappers';
+import { Email, Img, Status } from '../components/cell-wrappers';
 
 const
   internal = {
     getByPath(path) {
       const index = this.list.findIndex(el => el.path === path); // поиск объекта в списке по совпадению path
-      return {index,...this.list[index]}; 
+      return { index, ...this.list[index] };
     },
     getPathList() {
       return this.list.map(({ path }) => path); // получение массива строк 
@@ -27,21 +27,20 @@ const
         transform: data => data.results,
         title: 'Rick & Morty',
         columns: [
-          { name: 'Image', getVal: obj => obj.image, wrap: Img},
+          { name: 'Image', getVal: obj => obj.image, wrap: Img },
           { name: 'Name', getVal: obj => obj.name },
-          { name: 'Status', getVal: obj => obj.status },
-          
+          { name: 'Status', getVal: obj => obj.status, wrap: Status },
         ]
       },
       {
         path: 'omdbapi-green',
         api: 'https://www.omdbapi.com/?apikey=a2b07930&s=green',
-        transform: data => data.Search.map(film=>({id:film.imdbID, ...film})),
+        transform: data => data.Search.map(film => ({ id: film.imdbID, ...film })),
         title: 'OMDb',
         columns: [
           { name: 'Title', getVal: obj => obj.Title },
           { name: 'Year', getVal: obj => obj.Year },
-          { name: 'Poster', getVal: obj => obj.Poster,  wrap: Img},
+          { name: 'Poster', getVal: obj => obj.Poster, wrap: Img },
         ]
       }]
   };
