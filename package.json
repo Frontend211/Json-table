@@ -20,7 +20,7 @@
     "url": "https://github.com/Frontend211/Json-table/issues"
   },
   "homepage": "https://github.com/Frontend211/Json-table#readme",
-  "dependencies": {    
+  "dependencies": {
     "next": "^13.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
