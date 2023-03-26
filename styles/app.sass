@@ -28,15 +28,25 @@ nav
 
   td, th
     padding: 0.2em 1em
+  :is(td,th):has(>img)
+    padding: 0
+  img
+    display: block
+    margin: auto
 
   tr:nth-of-type(even) 
     background-color: LightGray
 
   tbody tr:hover 
     background-color: gold
-  
+    
+    & img
+      transform: scale(5)
+
   td:hover 
     box-shadow: inset 0px 0px 10px 1px DarkOrange
+
+    
 
   tr:last-of-type 
    border-bottom: 2px solid DarkGreen
