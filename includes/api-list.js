@@ -1,3 +1,4 @@
+import FetchUser from '../components/FetchUser';
 import { Email, Img } from '../components/cell-wrappers';
 
 const
@@ -15,6 +16,7 @@ const
         api: 'https://jsonplaceholder.typicode.com/users',
         transform: data => data,
         title: 'Users',
+        detailsComponent : FetchUser,
         columns: [
           { name: 'Name', getVal: obj => obj.name, setVal: (obj, val) => Object.assign(obj, { name: val }) },
           { name: 'Email', getVal: obj => obj.email, setVal: (obj, val) => Object.assign(obj, { email: val }), wrap: Email },

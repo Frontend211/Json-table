@@ -2,8 +2,8 @@ import { useState } from 'react';
 // import TBody from '../components/TBody';
 // import THead from '../components/THead';
 
-export default function SmartList({ startData, columns }) {
-  // console.log('SmartList columns=',columns);
+export default function SmartList({ startData, columns, DetailsComponent }) {
+  // console.log('SmartList detailsComponent=',DetailsComponent);
   const
     [filterValue, setFilter] = useState(''),
     [editRow, setEditRow] = useState(null),
@@ -11,6 +11,7 @@ export default function SmartList({ startData, columns }) {
     [editContent,setEditContent] = useState(''),
     // eslint-disable-next-line no-unused-vars
     [data, setData] = useState(startData),
+    [detailsId,setDetailsId] = useState(null),
     [sortCol, setSortCol] = useState(0); //+1,+2,+3... : asc by 0,1,2-th col,   -1,-2,-3 : desc 0,1,2-th col 
   let
     // eslint-disable-next-line no-unused-vars
@@ -23,14 +24,12 @@ export default function SmartList({ startData, columns }) {
   if (filterValue) {
     // viewData = viewData.filter(obj=>JSON.stringify(obj).includes(filterValue));
     viewData = viewData.filter(obj => columns
-      .map(col => col.getVal(obj).toLowerCase())
+      .map(col => col.getVal(obj).toString().toLowerCase())
       .some(str => str.includes(filterValue.toLowerCase())));
   }
 
-
-  console.log('editRow editCol = ',editRow,editCol);
   return <>
-    filter:<input type="search" value={filterValue} onInput={evt => setFilter(evt.target.value)}></input>{filterValue}
+    filter:<input type="search" value={filterValue} onInput={evt => setFilter(evt.target.value)}></input>
     <table className="smart">
       <thead>
         <tr onClick={evt => {
@@ -51,6 +50,7 @@ export default function SmartList({ startData, columns }) {
           {columns?.map((el, i) =>
             <th key={el.name} className={(Math.abs(sortCol) - 1 === i ? 'sort ' : '') + (-sortCol - 1 === i ? ' desc' : '')}>{el.name}</th>)
           }
+          {DetailsComponent && <th></th>}
         </tr>
       </thead>
 
@@ -68,8 +68,8 @@ export default function SmartList({ startData, columns }) {
 
         {viewData.map((el, rowN) =>
           <tr key={el.id}>
-            {columns.map((col, colN) => <td key={col.name}>
-              {(rowN === editRow && colN === editCol)
+            {columns.map((col, colN) => <td key={col.name} title={columns[colN].setVal && "double click to edit"}>
+              {(rowN === editRow && colN === editCol && columns[colN].setVal)
                 ? (<>
                   <input type="text" value={editContent} onInput={evt=>setEditContent(evt.target.value)} />
                   <button onClick={_=>{
@@ -80,8 +80,10 @@ export default function SmartList({ startData, columns }) {
                   }}>🆗</button></>)
                 : (col.wrap ? <col.wrap value={col.getVal(el)} /> : col.getVal(el))
               }</td>)}
+            {DetailsComponent && <td><button onClick={_=>setDetailsId(el.id)}>Details</button></td>}
           </tr>)}
       </tbody>
     </table>
+    {detailsId && <DetailsComponent id={detailsId} />}
   </>;
 }

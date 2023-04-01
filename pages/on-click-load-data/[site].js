@@ -10,7 +10,7 @@ export default function FetchDataOnClick() {
     [error, setError] = useState(null),
     [data, setData] = useState(null),
     router = useRouter(),
-    { api, transform, columns } = getByPath(router.query.site),
+    { api, transform, columns, detailsComponent } = getByPath(router.query.site),
     fetchData = _ => {   //async
       // если у компонента появятся пропсы которые могут изменяться - то тут необходимо будет сбрасывать ошибку
       setLoading(true);
@@ -23,6 +23,6 @@ export default function FetchDataOnClick() {
 
   if (loading) return <div className="spinner"></div>;
   if (error) return <div className="error">{error.message}</div>;
-  if (data) return <SmartList startData={data} columns={columns}/>;
+  if (data) return <SmartList startData={data} columns={columns} DetailsComponent={detailsComponent} />;
   return <button onClick={fetchData}>Load Data</button>;
 }
