@@ -3,7 +3,7 @@ import SmartList from '../../components/SmartList';
 
 export default function StaticUsersPage({ data, index }) {
 
-  return <SmartList startData={data} columns={apiList[index].columns}/>;
+  return <SmartList key={index} startData={data} columns={apiList[index].columns}/>;
 }
 
 export async function getStaticProps({ params: { site } }) {
