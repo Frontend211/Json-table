@@ -9,8 +9,11 @@ export default function FetchDataOnMountPage() {
     // [loading, setLoading] = useState(false),
     [error, setError] = useState(null),
     [data, setData] = useState(null),
+    [detailsId, setDetailsId] = useState(null),
     router = useRouter(),
-    { api, transform, columns, detailsComponent } = getByPath(router.query.site),
+    { api, transform, columns, DetailsComponent } = getByPath(router.query.site),
+    detailsCallBack = DetailsComponent ? id => setDetailsId(id) : null,
+    
     fetchData = _ => {   //async
       // если у компонента появятся пропсы которые могут изменяться - то тут необходимо будет сбрасывать ошибку
       setError(null);
@@ -25,6 +28,9 @@ export default function FetchDataOnMountPage() {
   useEffect(fetchData, [router.query.site]);
 
   if (error) return <div className="error">{error.message}</div>;
-  if (data) return <SmartList startData={data} columns={columns} DetailsComponent={detailsComponent} />;
+  if (data) return <>
+    <SmartList startData={data} columns={columns} detailsCallBack={detailsCallBack} />
+    {detailsId && <DetailsComponent id={detailsId} />}
+  </>;
   return <div className="spinner"></div>;
 }

@@ -1,4 +1,5 @@
 import FetchUser from '../components/FetchUser';
+import OneUser from '../components/OneUser';
 import { Email, Img } from '../components/cell-wrappers';
 
 const
@@ -16,11 +17,14 @@ const
         api: 'https://jsonplaceholder.typicode.com/users',
         transform: data => data,
         title: 'Users',
-        detailsComponent : FetchUser,
+        DetailsComponent: FetchUser,
+        apiForStatic: 'https://jsonplaceholder.typicode.com/posts',
+        StaticDetailsComponent: OneUser,
         columns: [
           { name: 'Name', getVal: obj => obj.name, setVal: (obj, val) => Object.assign(obj, { name: val }) },
           { name: 'Email', getVal: obj => obj.email, setVal: (obj, val) => Object.assign(obj, { email: val }), wrap: Email },
           { name: 'Address city', getVal: obj => obj.address?.city, setVal: (obj, val) => Object.assign(obj, ({ address: Object.assign(obj.address, { city: val }) })) },
+          // { name: 'Geo Coordinates', getVal: ({ address: { geo: { lat, lng } } = { geo: { lat: NaN, lng: NaN } } }) => lat + ',' + lng }
           { name: 'Geo Coordinates', getVal: ({ address: { geo: { lat, lng } } }) => lat + ',' + lng }
         ]
       },

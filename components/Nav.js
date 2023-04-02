@@ -15,6 +15,5 @@ export default function Nav(){
       <li key={path}><Link href={'/on-mount-load-data/'+path}>Auto {title}</Link></li>
     )}
   </ul>
-  <hr/>
   </nav>;
 }

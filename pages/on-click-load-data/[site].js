@@ -9,11 +9,14 @@ export default function FetchDataOnClick() {
     [loading, setLoading] = useState(false),
     [error, setError] = useState(null),
     [data, setData] = useState(null),
+    [detailsId, setDetailsId] = useState(null),
     router = useRouter(),
-    { api, transform, columns, detailsComponent } = getByPath(router.query.site),
+    { api, transform, columns, DetailsComponent } = getByPath(router.query.site),
+    detailsCallBack = DetailsComponent ? id => setDetailsId(id) : null,
     fetchData = _ => {   //async
       // если у компонента появятся пропсы которые могут изменяться - то тут необходимо будет сбрасывать ошибку
       setLoading(true);
+      setDetailsId(null);
       fetch(api)                  // try {
         .then(res => res.json())
         .then(obj => setData(transform(obj)))  // setData (await (await fetch(api)).json())
@@ -23,6 +26,9 @@ export default function FetchDataOnClick() {
 
   if (loading) return <div className="spinner"></div>;
   if (error) return <div className="error">{error.message}</div>;
-  if (data) return <SmartList startData={data} columns={columns} DetailsComponent={detailsComponent} />;
+  if (data) return <>
+    <SmartList startData={data} columns={columns} detailsCallBack={detailsCallBack} />
+    {detailsId && <DetailsComponent id={detailsId} />}
+  </>;
   return <button onClick={fetchData}>Load Data</button>;
 }

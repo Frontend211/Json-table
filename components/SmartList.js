@@ -2,16 +2,15 @@ import { useState } from 'react';
 // import TBody from '../components/TBody';
 // import THead from '../components/THead';
 
-export default function SmartList({ startData, columns, DetailsComponent }) {
+export default function SmartList({ startData, columns, detailsCallBack }) {
   // console.log('SmartList detailsComponent=',DetailsComponent);
   const
     [filterValue, setFilter] = useState(''),
     [editRow, setEditRow] = useState(null),
     [editCol, setEditCol] = useState(null),
-    [editContent,setEditContent] = useState(''),
+    [editContent, setEditContent] = useState(''),
     // eslint-disable-next-line no-unused-vars
     [data, setData] = useState(startData),
-    [detailsId,setDetailsId] = useState(null),
     [sortCol, setSortCol] = useState(0); //+1,+2,+3... : asc by 0,1,2-th col,   -1,-2,-3 : desc 0,1,2-th col 
   let
     // eslint-disable-next-line no-unused-vars
@@ -50,14 +49,14 @@ export default function SmartList({ startData, columns, DetailsComponent }) {
           {columns?.map((el, i) =>
             <th key={el.name} className={(Math.abs(sortCol) - 1 === i ? 'sort ' : '') + (-sortCol - 1 === i ? ' desc' : '')}>{el.name}</th>)
           }
-          {DetailsComponent && <th></th>}
+          {detailsCallBack && <th></th>}
         </tr>
       </thead>
 
       <tbody onDoubleClick={evt => {
         const td = evt.target.closest('td');
         if (td) {
-          const 
+          const
             col = td.cellIndex,
             row = td.closest('tr')?.sectionRowIndex;
           setEditCol(col);
@@ -68,22 +67,21 @@ export default function SmartList({ startData, columns, DetailsComponent }) {
 
         {viewData.map((el, rowN) =>
           <tr key={el.id}>
-            {columns.map((col, colN) => <td key={col.name} title={columns[colN].setVal && "double click to edit"}>
+            {columns.map((col, colN) => <td key={col.name} title={columns[colN].setVal && 'Double click to edit'}>
               {(rowN === editRow && colN === editCol && columns[colN].setVal)
                 ? (<>
-                  <input type="text" value={editContent} onInput={evt=>setEditContent(evt.target.value)} />
-                  <button onClick={_=>{
+                  <input type="text" value={editContent} onInput={evt => setEditContent(evt.target.value)} />
+                  <button onClick={_ => {
                     setEditRow(null);
-                    const clone=[...data];
-                    clone[rowN]= columns[colN].setVal(clone[rowN],editContent);
-                    setData(clone);                    
+                    const clone = [...data];
+                    clone[rowN] = columns[colN].setVal(clone[rowN], editContent);
+                    setData(clone);
                   }}>🆗</button></>)
                 : (col.wrap ? <col.wrap value={col.getVal(el)} /> : col.getVal(el))
               }</td>)}
-            {DetailsComponent && <td><button onClick={_=>setDetailsId(el.id)}>Details</button></td>}
+            {detailsCallBack && <td><button onClick={_ => detailsCallBack(el.id)}>Details</button></td>}
           </tr>)}
       </tbody>
     </table>
-    {detailsId && <DetailsComponent id={detailsId} />}
   </>;
 }
