@@ -7,6 +7,6 @@ export function Img({value}){
   return <img className="icon" src={value} alt={value}/>;
 }
 
-export default function WhatsApp({ value }) {
+export function WhatsApp({ value }) {
     return <a href={'https://api.whatsapp.com/send/?phone='+value}>{value}</a>;
 }
