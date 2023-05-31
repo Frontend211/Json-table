@@ -8,5 +8,5 @@ export function Img({value}){
 }
 
 export function WhatsApp({ value }) {
-    return <a href={'https://api.whatsapp.com/send/?phone='+value}>{value}</a>;
+    return <a href={'https://wa.me/'+value}>{value}</a>;
 }
