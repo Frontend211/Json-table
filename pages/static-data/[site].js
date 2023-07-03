@@ -8,7 +8,7 @@ export default function StaticUsersPage({ data, detailsData, index }) {
     {StaticDetailsComponent} = apiList[index];
   return <>
     <SmartList key={index} startData={data} columns={apiList[index].columns} detailsCallBack={StaticDetailsComponent ? id => setDetailsId(id) : null} />
-    {detailsId && <>
+    {detailsId && StaticDetailsComponent && <>
       <StaticDetailsComponent user={data.find(user => user.id === detailsId)} />
       <SmartList key={detailsId} startData={detailsData.filter(post=>post.userId === detailsId)} columns={[{name:'id',getVal:post=>post.id},{name:'title',getVal: post=>post.title},{name:'body',getVal:post=>post.body}]} />
     </>}
